@@ -1,0 +1,43 @@
+parameters:
+    colors:
+        Beige: '#fffac8'
+        Blue: '#0082c8'
+        Black: '#000000'
+        Brown: '#aa6e28'
+        Coral: '#ffd8b1'
+        Cyan: '#46f0f0'
+        Green: '#3cb44b'
+        Grey: '#808080'
+        Lavender: '#e6beff'
+        Lime: '#d2f53c'
+        Magenta: '#f032e6'
+        Maroon: '#800000'
+        Mint: '#aaffc3'
+        Navy: '#000080'
+        Olive: '#808000'
+        Orange: '#f58231'
+        Pink: '#fabebe'
+        Purple: '#911eb4'
+        Red: '#e6194b'
+        Teal: '#008080'
+        Yellow: '#ffe119'
+
+services:
+    GaylordP\ColorBundle\Command\ColorCommand:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@parameter_bag'
+        tags:
+            - 'console.command'
+
+    GaylordP\ColorBundle\Form\Type\ColorExtensionType:
+        arguments:
+            - '@GaylordP\ColorBundle\Repository\ColorRepository'
+        tags:
+            - 'form.type'
+
+    GaylordP\ColorBundle\Repository\ColorRepository:
+        arguments:
+            - '@doctrine'
+        tags:
+            - 'doctrine.repository_service'

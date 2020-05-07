@@ -1,0 +1,27 @@
+{% use 'bootstrap_4_layout.html.twig' %}
+
+{% block color_extension_widget -%}
+    {% apply spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+            {%- for child in form %}
+                {{- block('color_extension_entry_widget') -}}
+            {% endfor -%}
+        </div>
+    {% endapply %}
+{%- endblock %}
+
+{% block color_extension_entry_widget -%}
+    {% set color = form.vars.choices[child.vars.name].data.slug %}
+    <div class="btn btn-{{ color }} form-color-select">
+        {{- form_widget(child, {
+            parent_label_class: label_attr.class|default(''),
+            translation_domain: choice_translation_domain,
+            valid: valid,
+        }) -}}
+        {% if ico %}
+            <i class="{{ ico }} fa-2x"></i>
+        {% elseif form.parent.vars.ico %}
+            <i class="{{ form.parent.vars.ico }} fa-2x"></i>
+        {% endif %}
+    </div>
+{%- endblock %}
