@@ -16,10 +16,12 @@ class ColorCommand extends Command
     private $em;
     private $colors;
 
-    public function __construct(EntityManagerInterface $em, ParameterBagInterface $parameterBag)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        array $colors
+    ) {
         $this->em = $em;
-        $this->colors = $parameterBag->get('colors');
+        $this->colors = $colors;
 
         parent::__construct();
     }
